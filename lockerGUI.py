@@ -7,12 +7,24 @@ from kivy.uix.button import Button
 from kivy.config import Config
 from kivy.clock import Clock
 
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
+import time
 
-#solenoid1Pin = 22
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(solenoid1Pin, GPIO.OUT)
-#GPIO.output(solenoid1Pin, GPIO.LOW)
+started = time.time()
+
+# GPIO setup
+solenoid1Pin = 11
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(solenoid1Pin, GPIO.OUT)
+
+#Positions
+left=2
+center=7
+right=12
+
+#Initialization
+pwm=GPIO.PWM(11,50)
+pwm.start(0)
 
 class lockerGUI(App):
     def build(self):
@@ -36,11 +48,11 @@ class lockerGUI(App):
         return self.window
     
     def testButtonAction(self,instance):
+        time.sleep(0.5)
         self.testButton.text = "UNLOCKED"
-        #GPIO.output(solenoid1Pin, GPIO.HIGH)
-        # schedule it to turn off:
-        #Clock.schedule_once(GPIO.output(solenoid1Pin, GPIO.LOW), 5)
-        #self.testButton.text = "UNLOCK"
+        pwm.ChangeDutyCycle(left) # Left - 90 deg position
+        time.sleep(2)
+        pwm.ChangeDutyCycle(right) # Right +90 position
     
 Config.set("graphics",'width','600')
 Config.set("graphics",'height','1024')
