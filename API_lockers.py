@@ -14,7 +14,7 @@ def authorise_check(id, locker):
     if (id not in data):
         return "<h1>404</h1><p>Student not found.</p>", 404
     elif(locker not in data[id]["lockers"]):
-        return "<h1>400</h1><p>Student not authorized.</p>", 400
+        return "<h1>401</h1><p>Student not authorized.</p>", 401
     else:
         return "<h1>200</h1><p>Student authorized</p>", 200
 
