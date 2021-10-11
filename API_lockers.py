@@ -2,8 +2,10 @@ from flask import Flask
 
 app = Flask(__name__)
 
-data = {111111 : {"lockers": [1,2]},
-        222222 : {"lockers": [2,3]}}
+data = {166126147227: {"lockers": [1,2]},
+        23119016145 : {"lockers": [1,3]},
+        5016117342 : {"lockers": [2,3]}
+       }
 
 @app.route("/<int:id>/<int:locker>", methods=['GET'])
 def authorise_check(id, locker):
