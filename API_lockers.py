@@ -10,7 +10,7 @@ def authorise_check(id, locker):
     if (id not in data):
         return "",404
     elif(locker not in data[id]["lockers"]):
-        return "", 401
+        return "", 403
     else:
         return "", 200
 
